@@ -4,17 +4,24 @@ export const getAllTrips = ({trips}) => trips;
 
 export const getFilteredTrips = ({trips, filters}) => {
   let output = trips;
+  console.log(filters);   // FILTERS
+
 
   // filter by search phrase
   if(filters.searchPhrase){
     const pattern = new RegExp(filters.searchPhrase, 'i');
     output = output.filter(trip => pattern.test(trip.name));
-  }
+    console.log('pattern-tripsredux', pattern);
+    console.log('pattern-tripsredux', typeof(pattern)); //obj
 
+  }
   // TODO - filter by duration
 
   // TODO - filter by tags
-
+  if(filters.activeTag){
+    const toCompare = new RegExp(filters.activeTag, 'i');
+    output = output.filter(trip => toCompare.test(trip.tags));
+  }
   // TODO - sort by cost descending (most expensive goes first)
 
   return output;

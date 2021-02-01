@@ -17,7 +17,6 @@ import NotFound from './components/views/NotFound/NotFound';
 
 import parseTrips from './utils/parseTrips';
 import {setMultipleStates} from './redux/globalRedux';
-
 import {AnimatedSwitch} from 'react-router-transition';
 
 
@@ -46,9 +45,9 @@ class App extends React.Component {
         <MainLayout>
           <AnimatedSwitch
             location={location}
-            atEnter={{ opacity: 0 }}
-            atLeave={{ opacity: 0 }}
-            atActive={{ opacity: 1 }}
+            atEnter={{ opacity: 0,marginTop: 200 }}
+            atLeave={{ opacity: 1,marginTop: 0 }}
+            atActive={{ opacity: 1, marginTop: 0 }}
           >
             <Route exact path='/' component={Home} />
             <Route exact path='/trips' component={Trips} />
