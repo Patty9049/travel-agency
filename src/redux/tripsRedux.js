@@ -5,6 +5,7 @@ export const getAllTrips = ({trips}) => trips;
 export const getFilteredTrips = ({trips, filters}) => {
   let output = trips;
   console.log(filters);   // FILTERS
+  console.log(output);   // OUTPUT
 
 
   // filter by search phrase
@@ -16,7 +17,12 @@ export const getFilteredTrips = ({trips, filters}) => {
 
   }
   // TODO - filter by duration
+  if(filters.duration.from, filters.duration.to){
+    console.log('filters.duration.from', filters.duration.from);
+    console.log('filters.duration.to', filters.duration.to);
 
+    output = output.filter(trip => trip.days >= filters.duration.from && trip.days <= filters.duration.to);
+  }
   // TODO - filter by tags
   if(filters.activeTag){
     const toCompare = new RegExp(filters.activeTag, 'i');
