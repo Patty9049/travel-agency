@@ -1,4 +1,6 @@
 import countries from '../data/countries.json';
+import pricing from '../data/pricing.json';
+// import {parseOptionPrice} from './parseOptionPrice';
 
 const parseTrips = (trips, setStates) => {
   const newState = {
@@ -6,6 +8,11 @@ const parseTrips = (trips, setStates) => {
     regions: {},
     subregions: {},
     tags: {},
+    order: {
+      trip: null,
+      email: '',
+      options: {},
+    },
   };
 
   for(let trip of trips){
@@ -56,7 +63,93 @@ const parseTrips = (trips, setStates) => {
     }
   }
 
+  for(let option of pricing){
+    if(typeof(option.defaultValue) != 'undefined'){
+      newState.order.options[option.id] = option.defaultValue;
+    } else if(typeof(option.limits) != 'undefined' && typeof(option.limits.min) != 'undefined'){
+      newState.order.options[option.id] = option.limits.min;
+    } else if(option.type == 'checkboxes'){
+      newState.order.options[option.id] = [];
+    } else {
+      newState.order.options[option.id] = '';
+    }
+  }
+
   setStates(newState);
 };
 
 export default parseTrips;
+
+export const calculateTotal = (tripCost, options) => {
+  let total = parseOptionPrice(tripCost).value;
+  let multiplier = 0;
+  for (let option of pricing) {
+    const currentValue = options[option.id];
+    if (typeof (currentValue) != 'undefined') {
+      if (Array.isArray(currentValue) && Array.isArray(option.values)) {
+        for (let optionId of currentValue) {
+          const value = option.values.filter(opt => opt.id == optionId)[0];
+          const price = parseOptionPrice(value.price);
+          if (price.type == 'multiplier') {
+            multiplier += price.value;
+          }
+          else if (price.type == 'number') {
+            total += price.value;
+          }
+        }
+      }
+      else if (currentValue !== '' && Array.isArray(option.values)) {
+        const value = option.values.filter(opt => opt.id == currentValue)[0];
+        const price = parseOptionPrice(value.price);
+        if (price.type == 'multiplier') {
+          multiplier += price.value;
+        }
+        else if (price.type == 'number') {
+          total += price.value;
+        }
+      }
+      else if (option.type == 'number') {
+        const price = parseOptionPrice(option.price);
+        if (price.type == 'multiplier') {
+          multiplier += price.value * currentValue;
+        }
+        else if (price.type == 'number') {
+          total += price.value * currentValue;
+        }
+      }
+    }
+  }
+  return total * multiplier;
+};
+
+export const formatPrice = price => {
+  return typeof(price) != 'number'
+    ? price
+    : Math.ceil(price)
+      .toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      });
+};
+
+export const parseOptionPrice = price => {
+  if (typeof (price) == 'number') {
+    return { type: 'number', value: price };
+  }
+  else {
+    const priceParsed = price.replace(/^\$\s*/, '').replace(/,/g, '');
+    const pricePercent = priceParsed.match(/(^\d+)%$/);
+    if (pricePercent) {
+      return { type: 'multiplier', value: parseFloat(pricePercent[1]) / 100 };
+    }
+    else if (!isNaN(priceParsed)) {
+      return { type: 'number', value: parseFloat(priceParsed) };
+    }
+    else {
+      return { type: 'error', value: 0 };
+    }
+  }
+};
+
