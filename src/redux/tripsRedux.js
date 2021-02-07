@@ -16,23 +16,11 @@ export const getFilteredTrips = ({trips, filters}) => {
     output = output.filter(trip => trip.days >= filters.duration.from && trip.days <= filters.duration.to);
   }
   // TODO - filter by tags
-  if(filters.activeTag){
-    const justOne = filters.activeTag.map(tag => tag);
+  if(filters.tags){
+    const justOne = filters.tags.map(tag => tag);
     const toCompare = new RegExp(justOne, 'i');
     console.log('toCompare', toCompare);
     output = output.filter(trip => toCompare.test(trip.tags));
-
-    // const activeTagTrips = [];
-
-    // filters.activeTag.forEach(tag => {
-    //   output.forEach(trip => {
-    //     if(trip.tags.includes(tag)){
-    //       activeTagTrips.push(trip);
-    //     }
-    //   });
-    // });
-    // output = activeTagTrips;
-
   }
   // TODO - sort by cost descending (most expensive goes first)
 

@@ -46,7 +46,6 @@ export default function reducer(statePart = [], action = {}) {
       };
     case REMOVE_TAG:
       console.log('REMOVE TAG');
-      statePart.tags = [statePart.tags];
       return {
         ...statePart,
         // tags: action.payload,
