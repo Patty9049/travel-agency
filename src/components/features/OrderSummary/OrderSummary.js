@@ -7,19 +7,19 @@ import {calculateTotal, formatPrice}  from '../../../utils/parseTrips';
 
 const OrderSummary = (props) => {
   console.log('OPTIONS-ORDERSUMMARY', props.options);
-  console.log('props.tCost-ORDERSUMMARY', props.tCost);
+  console.log('props.tCost-ORDERSUMMARY', props.tripCost);
   return (
     <Row>
       <Col xs={12} sm={6} lg={4}>
         <h2  className={styles.component}>
-          Total:<strong>{formatPrice(calculateTotal(props.tCost, props.options))}</strong>
+          Total:<strong>{formatPrice(calculateTotal(props.tripCost, props.options))}</strong>
         </h2>
       </Col>
     </Row>
   );
 };
 OrderSummary.propTypes = {
-  tCost: PropTypes.string,
+  tripCost: PropTypes.string,
   options: PropTypes.object,
 };
 

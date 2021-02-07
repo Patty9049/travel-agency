@@ -37,15 +37,22 @@ export default function reducer(statePart = [], action = {}) {
     case ADD_TAG:
       console.log( 'action', action);
       console.log( 'ADD_TAG statePart', statePart);
+      console.log( 'ADD_TAG statePart.tags', statePart.tags);
+
       return {
         ...statePart,
-        activeTag: action.payload,
+        tags: [...statePart.tags, action.payload],
+        // tags: statePart.tags + ' ' + action.payload,
       };
     case REMOVE_TAG:
       console.log('REMOVE TAG');
+      statePart.tags = [statePart.tags];
       return {
         ...statePart,
-        activeTag: action.payload,
+        // tags: action.payload,
+        tags: statePart.tags.filter(tag => tag != action.payload),
+        // tags: statePart.tags.splice(action.payload),
+        // activeTag:  statePart.activeTag.filter(tag => tag != action.payload),
       };
     case DURATION_FROM:
       console.log('DURATION_FROM');
