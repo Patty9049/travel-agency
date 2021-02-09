@@ -13,26 +13,35 @@ const optionTypes = {
   number: OrderOptionNumber,
 };
 
-const OrderOption = ({name, type, ...otherProps}) => {
-  const OptionComponent = optionTypes[type];
+const OrderOption = () => {
+  const {name, type /*, id, setOrderOption*/} = this.props;
+  const OptionComponent = {};
+  console.log('OptionComponent', OptionComponent);
+  console.log('OptionComponent this.props', this.props);
+
   if(!OptionComponent){
     return null;
   } else {
     return (
       <div className={styles.component}>
-        <h3 className={styles.title}>NAME{name}</h3>
-        <OptionComponent
-          {...otherProps}
-        />
+        <h3 className={styles.title}>{name}</h3>
+        {/* <OptionComponent /> */}
+        <div key={optionTypes[type]}
+          //setOptionValue={value => setOrderOption({[id]: value})}
+          //props={this.props}
+        >
+        </div>
       </div>
     );
   }
 };
-console.log('name', {name});
+
 OrderOption.propTypes = {
   tripCost: PropTypes.string,
   options: PropTypes.object,
   name: PropTypes.string,
+  type: PropTypes.string,
+  setOptionValue: PropTypes.func,
 };
 
 export default OrderOption;

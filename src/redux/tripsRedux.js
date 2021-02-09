@@ -19,7 +19,6 @@ export const getFilteredTrips = ({trips, filters}) => {
   if(filters.tags){
     const justOne = filters.tags.map(tag => tag);
     const toCompare = new RegExp(justOne, 'i');
-    console.log('toCompare', toCompare);
     output = output.filter(trip => toCompare.test(trip.tags));
   }
   // TODO - sort by cost descending (most expensive goes first)
