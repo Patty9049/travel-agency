@@ -123,7 +123,6 @@ export const calculateTotal = (tripCost, options) => {
 };
 
 export const formatPrice = price => {
-  return typeof(price) != 'number';
   return typeof(price) != 'number'
     ? price
     : Math.ceil(price)

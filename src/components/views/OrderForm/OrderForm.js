@@ -26,25 +26,6 @@ const OrderForm = (props) => {
             />
           </Col>);
       })}
-      {/* {pricing.map(el => (
-        <Col key={el.id} md={4}>
-          {el.id}
-        </Col>
-      ))} */}
-      {/* {pricing.map(option => {
-        console.log('option', option);
-        console.log('option.id', option.id);
-        return (
-          <Col key={option.name} md={4}>
-            <OrderOption
-              key={option.id}
-              name={option.name}
-              type={option.type}
-              props={[...option]}
-              currentValue={option.id}
-            />
-          </Col>);
-      })} */}
       <Col xs={12} sm={6} lg={4}>
         <OrderSummary tripCost={props.tripCost} options={props.options}/>
       </Col>

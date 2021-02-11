@@ -35,31 +35,6 @@ const OrderOption = (props) => {
   }
 };
 
-// const OrderOption = () => {
-//   // const { /*, id, type, name, setOrderOption*/} = this.props;
-//   console.log('optionTypes', optionTypes);
-//   // const OptionComponent = optionTypes[type];
-//   // console.log('OptionComponent', OptionComponent);
-//   // console.log('OptionComponent this.props', this.props);
-
-//   // if(!OptionComponent){
-//   //   return null;
-//   // } else {
-//   return (
-//     <h2 >ORDEROPTION</h2>
-//     // <div className={styles.component}>
-//     //   <h3 className={styles.title}></h3>
-//     //   {/* <OptionComponent /> */}
-//     //   <div>
-//     //     {/* {name} */}
-//     //     {/* setOptionValue={value => setOrderOption({[id]: value})} */}
-//     //     {/* props={this.props} */}
-//     //   </div>
-//     // </div>
-//   );
-//   // }
-// };
-
 OrderOption.propTypes = {
   tripCost: PropTypes.string,
   options: PropTypes.object,
