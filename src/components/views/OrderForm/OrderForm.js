@@ -6,12 +6,32 @@ import OrderSummary from '../../features/OrderSummary/OrderSummary';
 import pricing from '../../../data/pricing.json';
 
 const OrderForm = (props) => {
-  // console.log('props.options', props.options);
+  console.log('props.options', props.options);
   // console.log('props.options', props.options[option.id]);
   // console.log('props.options', props.options);
+  console.log('pricing', pricing);
   return (
     <Row>
       {pricing.map(option => {
+        console.log('option', option);
+        console.log('option.id', option.id);
+        console.log('option.name', option.name);
+        console.log('props.options[option.id]', props.options[option.id]);
+
+        return (
+          <Col key={option.id} md={4}>
+            <OrderOption {...option}
+              currentValue={props.options[option.id]}
+              required={true}
+            />
+          </Col>);
+      })}
+      {/* {pricing.map(el => (
+        <Col key={el.id} md={4}>
+          {el.id}
+        </Col>
+      ))} */}
+      {/* {pricing.map(option => {
         console.log('option', option);
         console.log('option.id', option.id);
         return (
@@ -20,17 +40,18 @@ const OrderForm = (props) => {
               key={option.id}
               name={option.name}
               type={option.type}
-              props={option}
+              props={[...option]}
               currentValue={option.id}
             />
           </Col>);
-      })}
+      })} */}
       <Col xs={12} sm={6} lg={4}>
         <OrderSummary tripCost={props.tripCost} options={props.options}/>
       </Col>
     </Row>
   );
 };
+//Object.keys(countries)
 
 console.log('pricing', pricing);
 OrderForm.propTypes = {

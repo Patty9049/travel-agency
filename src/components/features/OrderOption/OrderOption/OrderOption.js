@@ -1,40 +1,64 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './OrderOption.scss';
-import OrderOptionDropdown from '../OrderOptionDropdown/OrderOptionDropdown';
-import OrderOptionIcons from '../OrderOptionIcons/OrderOptionIcons';
-import OrderOptionNumber from '../OrderOptionNumber/OrderOptionNumber';
-import OrderOptionCheckboxes from '../OrderOptionCheckboxes/OrderOptionCheckboxes';
+import setOrderOption from '../../../../redux/orderRedux';
+import OrderOptionDropdown from '../OrderOptionDropdown/OrderOptionDropdownContainer';
+// import OrderOptionIcons from '../OrderOptionIcons/OrderOptionIcons';
+// import OrderOptionNumber from '../OrderOptionNumber/OrderOptionNumber';
+// import OrderOptionCheckboxes from '../OrderOptionCheckboxes/OrderOptionCheckboxes';
+
 
 const optionTypes = {
   dropdown: OrderOptionDropdown,
-  icons: OrderOptionIcons,
-  checkboxes: OrderOptionCheckboxes,
-  number: OrderOptionNumber,
+  // icons: OrderOptionIcons,
+  // checkboxes: OrderOptionCheckboxes,
+  // number: OrderOptionNumber,
 };
 
-const OrderOption = () => {
-  const {name, type /*, id, setOrderOption*/} = this.props;
-  const OptionComponent = {};
-  console.log('OptionComponent', OptionComponent);
-  console.log('OptionComponent this.props', this.props);
-
+const OrderOption = (props) => {
+  const {id, name, type, ...otherProps} = props;
+  console.log('odrer option PROPS', props);
+  const OptionComponent = optionTypes[type];
+  console.log('otherProps', otherProps);
   if(!OptionComponent){
     return null;
   } else {
     return (
       <div className={styles.component}>
         <h3 className={styles.title}>{name}</h3>
-        {/* <OptionComponent /> */}
-        <div key={optionTypes[type]}
-          //setOptionValue={value => setOrderOption({[id]: value})}
-          //props={this.props}
-        >
-        </div>
+        <OptionComponent
+          {...otherProps}
+          setOptionValue={value => setOrderOption({[id]: value})}
+        />
       </div>
     );
   }
 };
+
+// const OrderOption = () => {
+//   // const { /*, id, type, name, setOrderOption*/} = this.props;
+//   console.log('optionTypes', optionTypes);
+//   // const OptionComponent = optionTypes[type];
+//   // console.log('OptionComponent', OptionComponent);
+//   // console.log('OptionComponent this.props', this.props);
+
+//   // if(!OptionComponent){
+//   //   return null;
+//   // } else {
+//   return (
+//     <h2 >ORDEROPTION</h2>
+//     // <div className={styles.component}>
+//     //   <h3 className={styles.title}></h3>
+//     //   {/* <OptionComponent /> */}
+//     //   <div>
+//     //     {/* {name} */}
+//     //     {/* setOptionValue={value => setOrderOption({[id]: value})} */}
+//     //     {/* props={this.props} */}
+//     //   </div>
+//     // </div>
+//   );
+//   // }
+// };
 
 OrderOption.propTypes = {
   tripCost: PropTypes.string,
