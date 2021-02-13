@@ -4,9 +4,7 @@ import styles from '../OrderOption/OrderOption.scss';
 import {formatPrice} from '../../../../utils/parseTrips';
 
 const OrderOptionDropdown = (props) => {
-  console.log('DROP PROPS', props);
   const {values, required, currentValue, setOptionValue} = props;
-  console.log('values', values);
   return (
     <select
       className={styles.dropdown}

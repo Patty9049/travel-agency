@@ -16,8 +16,6 @@ const newValueSet = (currentValue, id, checked) => {
 
 const OrderOptionCheckboxes = (props) => {
   const {values,  currentValue, setOptionValue} = props;
-  console.log('props ODRER OPTION CHCECKBOX', props);
-  console.log('currentValue ODRER OPTION CHCECKBOX', currentValue);
   return (
     <div className={styles.checkboxes}>
       {values.map(value => (

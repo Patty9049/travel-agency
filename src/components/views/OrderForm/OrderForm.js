@@ -7,17 +7,9 @@ import pricing from '../../../data/pricing.json';
 
 const OrderForm = (props) => {
   console.log('props.options', props.options);
-  // console.log('props.options', props.options[option.id]);
-  // console.log('props.options', props.options);
-  console.log('pricing', pricing);
   return (
     <Row>
       {pricing.map(option => {
-        console.log('option', option);
-        console.log('option.id', option.id);
-        console.log('option.name', option.name);
-        console.log('props.options[option.id]', props.options[option.id]);
-
         return (
           <Col key={option.id} md={4}>
             <OrderOption {...option}
@@ -32,9 +24,7 @@ const OrderForm = (props) => {
     </Row>
   );
 };
-//Object.keys(countries)
 
-console.log('pricing', pricing);
 OrderForm.propTypes = {
   tripCost: PropTypes.string,
   options: PropTypes.object,
