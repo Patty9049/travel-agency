@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from '../OrderOption/OrderOption.scss';
-import formatPrice from '../../../../utils/parseTrips';
+import {formatPrice} from '../../../../utils/parseTrips';
 
-const OrderOptionIcons = () => {
-  const {values, setOptionValue} = this.props;
+const OrderOptionIcons = (props) => {
+  const {values, setOptionValue} = props;
   return (
     <div className={styles.icons}>
       {values.map(value => (
@@ -17,6 +18,11 @@ const OrderOptionIcons = () => {
       ))}
     </div>
   );
+};
+
+OrderOptionIcons.propTypes = {
+  values: PropTypes.array,
+  setOptionValue: PropTypes.func,
 };
 
 export default OrderOptionIcons;
