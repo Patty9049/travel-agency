@@ -20,7 +20,7 @@ const optionTypes = {
 
 const OrderOption = (props) => {
   const {id, name, type, setOrderOption, ...otherProps} = props;
-  console.log('odrer option PROPS', props);
+  // console.log('odrer option PROPS', props);
   const OptionComponent = optionTypes[type];
   if(!OptionComponent){
     return null;
