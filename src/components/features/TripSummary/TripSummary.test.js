@@ -76,7 +76,7 @@ describe('Component TripSummary', () => {
     const days = 9;
     const component = shallow(<TripSummary id={id} image={image} name={name} cost={cost} days={days} tags={tags}/>);
     console.log(component.debug());
-    expect(component.exists('.tag')).toEqual(component.exists('.tags'));
+    expect(component.exists('.tags')).toEqual(false);
   });
 
   it('if array tags contain min 1 tag div className=tags exist.', () => {

@@ -20,8 +20,8 @@ const optionTypes = {
 
 const OrderOption = (props) => {
   const {id, name, type, setOrderOption, ...otherProps} = props;
-  // console.log('odrer option PROPS', props);
   const OptionComponent = optionTypes[type];
+  console.log('CONSOLE LOG', type);
   if(!OptionComponent){
     return null;
   } else {
@@ -38,8 +38,7 @@ const OrderOption = (props) => {
 };
 
 OrderOption.propTypes = {
-  tripCost: PropTypes.string,
-  options: PropTypes.object,
+  id: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
   setOptionValue: PropTypes.func,
